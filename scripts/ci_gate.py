@@ -159,7 +159,9 @@ def main() -> None:
         sys.exit(0)
 
     baseline = load_baseline(baseline_path)
-    current_metrics = dict(results.get("aggregate", {}))
+    # Eval results and locked baseline both use "aggregate"
+    current_metrics = dict(results.get("aggregate") or results.get("metrics") or {})
+    baseline_metrics = dict(baseline.get("aggregate") or baseline.get("metrics") or {})
 
     if args.demo_fail:
         # Artificially tank the metric so we can show the gate firing
@@ -168,9 +170,13 @@ def main() -> None:
         print(f"[demo-fail] Injected artificial drop: {args.metric} "
               f"{original:.4f} → {current_metrics[args.metric]:.4f}")
 
+    print(
+        f"Comparing {args.metric}: current={current_metrics.get(args.metric)}  "
+        f"baseline={baseline_metrics.get(args.metric)}  max_drop={args.threshold}"
+    )
     passed, message = check_gate(
         current_metrics,
-        baseline.get("metrics", {}),
+        baseline_metrics,
         threshold=args.threshold,
         metric=args.metric,
     )
