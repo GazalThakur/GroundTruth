@@ -59,7 +59,7 @@ def run_eval_matching_baseline(baseline: dict, config_path: str = "config.yaml")
         yaml.dump(cfg, f)
 
     print(f"Running eval: mode={ret['mode']}  rerank={ret['rerank']}")
-    return run_from_config(str(tmp))
+    return run_from_config(cfg=cfg)
 
 
 def check_gate(
