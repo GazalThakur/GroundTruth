@@ -1,0 +1,35 @@
+# Groundtruth default config — fully local, $0 cost.
+# To add a paid provider later: implement the class, then change the "provider" key.
+
+embedding:
+  provider: local_bge
+  model: BAAI/bge-base-en-v1.5
+  device: cpu          # change to "cuda" if you have a GPU
+
+reranker:
+  provider: local_bge
+  # MiniLM fits in ~1 GB RAM. Prefer BAAI/bge-reranker-base when you have more memory/GPU.
+  model: cross-encoder/ms-marco-MiniLM-L-6-v2
+  device: cpu
+
+llm:
+  provider: ollama
+  model: llama3.1:8b
+  base_url: http://localhost:11434
+  temperature: 0.0
+
+# Retrieval — change these to run the three ship-gate comparisons
+retrieval:
+  mode: dense          # dense | hybrid | bm25
+  rerank: false        # true → apply cross-encoder after first-stage
+  top_k: 10
+  candidate_k: 20      # how many candidates to fetch before reranking
+  chunk_size: 800      # eval-time chunk size (chars)
+  chunk_overlap: 100   # overlap between consecutive chunks
+  span_min_chars: 100  # span-hit: absolute overlap floor
+  span_min_frac: 0.30  # span-hit: fraction of gold span length
+
+# Paths
+data:
+  golden: data/golden/seed.jsonl
+  corpus: data/golden/corpus.jsonl

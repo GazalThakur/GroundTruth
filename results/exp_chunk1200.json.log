@@ -1,0 +1,28 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 4882.92it/s]
+
+=== Retrieval Eval  [dense[BAAI/bge-base-en-v1.5]]  (n=60 queries, judgments=29, chunks=722, chunk_size=1200, top_k=10) ===
+
+Aggregate metrics:
+  binary_recall@1       0.3167
+  binary_recall@10      0.8000
+  binary_recall@5       0.7500
+  mrr                   0.4878
+  ndcg@1                0.3167
+  ndcg@10               0.5564
+  ndcg@5                0.5338
+  recall@1              0.2722
+  recall@10             0.7833
+  recall@5              0.7333
+
+Hard misses (binary_recall@10 = 0): 12
+  [q_udf_01] Is User Development Fee collected by airport operators a statutory levy, or is i
+  [q_wc_01] What is the scope of an appeal under Section 30 of the Workmen Compensation Act 
+  [q_cbi_01] In an appeal against acquittal, when can the appellate court reverse the trial c
+  [q_cbi_02] Once the ocular account of a key eyewitness is discarded, can conviction rest so
+  [q_bail_02] When the material indicates the accused regularly participates in crime, how doe
+  [q_dlr_01] Can a High Court under Section 37 of the Arbitration Act interfere with the arbi
+  [q_cpc_01] When an auction purchaser fails to deposit 25% of the sale amount immediately, w
+  [q_crpc4_02] If a trial court order under Section 319 CrPC is imperfectly worded, should the 
+
+Full results written to results/exp_chunk1200.json

@@ -1,0 +1,43 @@
+# Groundtruth CI regression gate
+# Fails the PR when recall@10 drops more than 1 point vs the locked baseline.
+# Fully local — no paid API keys required.
+
+name: retrieval-gate
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run regression gate
+        run: |
+          python scripts/ci_gate.py --threshold 0.01
+
+      # Optional: upload latest metrics for debugging failed PRs
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retrieval-results
+          path: results/
+          retention-days: 14

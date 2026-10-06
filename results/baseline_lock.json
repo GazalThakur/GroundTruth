@@ -1,0 +1,29 @@
+{
+  "locked_at": "2026-10-05T14:38:56.408567+00:00",
+  "pipeline": "dense[BAAI/bge-base-en-v1.5]",
+  "n_queries": 60,
+  "n_judgments": 29,
+  "n_chunks": 1124,
+  "chunk_size": 800,
+  "chunk_overlap": 100,
+  "mode": "dense",
+  "rerank": false,
+  "top_k": 10,
+  "aggregate": {
+    "mrr": 0.5715476190476191,
+    "recall@1": 0.41388888888888886,
+    "binary_recall@1": 0.4666666666666667,
+    "ndcg@1": 0.4666666666666667,
+    "recall@5": 0.7083333333333334,
+    "binary_recall@5": 0.7333333333333333,
+    "ndcg@5": 0.5762703034883946,
+    "recall@10": 0.8,
+    "binary_recall@10": 0.8166666666666667,
+    "ndcg@10": 0.6115249493205084
+  },
+  "gate": {
+    "metric": "recall@10",
+    "max_drop": 0.01
+  },
+  "source_file": "results/baseline.json"
+}
